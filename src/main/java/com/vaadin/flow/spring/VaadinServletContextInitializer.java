@@ -650,7 +650,7 @@ public class VaadinServletContextInitializer
         return compositeListener;
     }
 
-    private Stream<Class<?>> findByAnnotation(Collection<String> packages,
+    public Stream<Class<?>> findByAnnotation(Collection<String> packages,
             Class<? extends Annotation>... annotations) {
         return findByAnnotation(packages, appContext, annotations);
     }
@@ -698,7 +698,7 @@ public class VaadinServletContextInitializer
         return beanClass;
     }
 
-    private Collection<String> getRoutePackages() {
+    public Collection<String> getRoutePackages() {
         return getDefaultPackages();
     }
 
