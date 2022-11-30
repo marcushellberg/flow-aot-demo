@@ -28,14 +28,13 @@ public class RouteInitializationAotProcessor implements BeanFactoryInitializatio
             ConfigurableListableBeanFactory beanFactory) {
         VaadinServletContextInitializer vsci = new VaadinServletContextInitializer(context);
         List<Class<?>> routeClasses = vsci.findByAnnotation(
-                vsci.getRoutePackages(), Route.class, RouteAlias.class)
-                .collect(Collectors.toList());
+                vsci.getRoutePackages(), Route.class, RouteAlias.class).toList();
 
         return (generationContext, beanFactoryInitializationCode) -> {
             for (Class<?> routeClass : routeClasses) {
-                System.out.println("Route class: "+routeClass.getName());
                 generationContext.getRuntimeHints().reflection().registerType(routeClass,
                         MemberCategory.values());
+                generationContext.getRuntimeHints().resources().registerType(routeClass);
             }
         };
     }

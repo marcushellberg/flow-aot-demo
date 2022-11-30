@@ -1,5 +1,8 @@
 package com.example.application;
 
+import com.example.application.views.MainLayout;
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.KeyDownEvent;
 import com.vaadin.flow.component.internal.JavaScriptBootstrapUI;
 import com.vaadin.flow.router.InternalServerError;
 import com.vaadin.flow.router.RouteNotFoundError;
@@ -37,6 +40,9 @@ public class FlowHintsRegistrar implements RuntimeHintsRegistrar {
         classes.add(RouteNotFoundError.class);
         classes.add(JavaScriptBootstrapUI.ClientViewPlaceholder.class);
         classes.add(DefaultErrorHandler.class);
+        classes.add(MainLayout.class);
+        classes.add(ClickEvent.class);
+        classes.add(KeyDownEvent.class);
         return classes;
     }
 
