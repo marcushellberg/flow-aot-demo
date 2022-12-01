@@ -1,5 +1,14 @@
 package com.example.application;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import org.springframework.aot.hint.MemberCategory;
+import org.springframework.aot.hint.ReflectionHints;
+import org.springframework.aot.hint.ResourceHints;
+import org.springframework.aot.hint.RuntimeHints;
+import org.springframework.aot.hint.RuntimeHintsRegistrar;
+import org.springframework.aot.hint.TypeReference;
 import com.example.application.views.MainLayout;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.KeyDownEvent;
@@ -7,11 +16,6 @@ import com.vaadin.flow.component.internal.JavaScriptBootstrapUI;
 import com.vaadin.flow.router.InternalServerError;
 import com.vaadin.flow.router.RouteNotFoundError;
 import com.vaadin.flow.router.internal.DefaultErrorHandler;
-import org.springframework.aot.hint.*;
-
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 public class FlowHintsRegistrar implements RuntimeHintsRegistrar {
     @Override
@@ -26,7 +30,7 @@ public class FlowHintsRegistrar implements RuntimeHintsRegistrar {
                 ref.registerType(TypeReference.of(c), MemberCategory.values());
             }
             for(String r : getFlowResourcePatterns()) {
-                hints.resources().registerPattern(r);
+                res.registerPattern(r);
             }
         } catch (Exception e) {
             throw new RuntimeException(e);
