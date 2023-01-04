@@ -10,9 +10,9 @@ import org.atmosphere.util.SimpleBroadcaster;
 import org.atmosphere.util.VoidAnnotationProcessor;
 import org.atmosphere.websocket.protocol.SimpleHttpProtocol;
 import org.springframework.aot.hint.MemberCategory;
-import org.springframework.aot.hint.ReflectionHints;
 import org.springframework.aot.hint.RuntimeHints;
 import org.springframework.aot.hint.RuntimeHintsRegistrar;
+import org.springframework.core.io.ClassPathResource;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -23,16 +23,12 @@ public class AtmosphereHintsRegistrar implements RuntimeHintsRegistrar {
 
 	@Override
 	public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
-		ReflectionHints ref = hints.reflection();
-		try {
-			for (Class<?> c : getAtmosphereClasses()) {
-				ref.registerType(c, MemberCategory.values());
-			}
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
+		hints.resources().registerResource(new ClassPathResource("org/atmosphere/util/version.properties"));
+		var reflectionHints = hints.reflection();
 
+		for (Class<?> c : getAtmosphereClasses()) {
+			reflectionHints.registerType(c, MemberCategory.values());
+		}
 	}
 
 	private Collection<? extends Class<?>> getAtmosphereClasses() {

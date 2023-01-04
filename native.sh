@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-./mvnw -Pproduction -Pnative native:compile
+./mvnw -Pproduction -Pnative spring-javaformat:apply clean package native:compile && ./target/flow-native
