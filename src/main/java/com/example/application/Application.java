@@ -22,21 +22,10 @@ import org.springframework.context.annotation.ImportRuntimeHints;
 @PWA(name = "flow-native", shortName = "flow-native", offlineResources = {})
 @NpmPackage(value = "line-awesome", version = "1.3.0")
 @NpmPackage(value = "@vaadin-component-factory/vcf-nav", version = "1.0.6")
-@ImportRuntimeHints({ AtmosphereHintsRegistrar.class })
 public class Application extends SpringBootServletInitializer implements AppShellConfigurator {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
-	}
-
-	@Bean
-	static FlowBeanFactoryInitializationAotProcessor flowBeanFactoryInitializationAotProcessor() {
-		return new FlowBeanFactoryInitializationAotProcessor();
-	}
-
-	@Bean
-	static RouteInitializationAotProcessor routeInitializationAotProcessor(ApplicationContext context) {
-		return new RouteInitializationAotProcessor(context);
 	}
 
 }

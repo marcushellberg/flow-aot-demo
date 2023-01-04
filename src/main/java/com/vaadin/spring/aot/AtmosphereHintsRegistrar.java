@@ -1,4 +1,4 @@
-package com.example.application;
+package com.vaadin.spring.aot;
 
 import org.atmosphere.cache.UUIDBroadcasterCache;
 import org.atmosphere.client.TrackMessageSizeInterceptor;

@@ -1,8 +1,10 @@
-package com.example.application;
+package com.vaadin.spring.aot;
 
 import com.vaadin.flow.component.Component;
 import com.vaadin.flow.component.ComponentEvent;
 import com.vaadin.flow.router.HasErrorParameter;
+import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteAlias;
 import com.vaadin.flow.router.internal.DefaultErrorHandler;
 import org.reflections.Reflections;
 import org.springframework.aot.hint.MemberCategory;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.boot.autoconfigure.AutoConfigurationPackages;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -23,26 +26,38 @@ class FlowBeanFactoryInitializationAotProcessor implements BeanFactoryInitializa
 	public BeanFactoryInitializationAotContribution processAheadOfTime(ConfigurableListableBeanFactory beanFactory) {
 		return (generationContext, beanFactoryInitializationCode) -> {
 			var hints = generationContext.getRuntimeHints();
+			var reflection = hints.reflection();
+			var resources = hints.resources();
 			var memberCategories = MemberCategory.values();
 			for (var pkg : getPackages(beanFactory)) {
 
 				var reflections = new Reflections(pkg);
 
+				// routes
+				var routeyTypes = new HashSet<Class<?>>();
+				routeyTypes.addAll(reflections.getTypesAnnotatedWith(Route.class));
+				routeyTypes.addAll(reflections.getTypesAnnotatedWith(RouteAlias.class));
+				for (var c : routeyTypes) {
+					reflection.registerType(c, memberCategories);
+					resources.registerType(c);
+				}
+				// routes
+
 				for (var c : reflections.getSubTypesOf(Component.class))
-					hints.reflection().registerType(c, memberCategories);
+					reflection.registerType(c, memberCategories);
 
 				for (var c : reflections.getSubTypesOf(HasErrorParameter.class))
-					hints.reflection().registerType(c, memberCategories);
+					reflection.registerType(c, memberCategories);
 
 				for (var c : reflections.getSubTypesOf(ComponentEvent.class))
-					hints.reflection().registerType(c, memberCategories);
+					reflection.registerType(c, memberCategories);
 
 				for (var c : Set.of("com.vaadin.flow.router.RouteNotFoundError.LazyInit.class",
 						DefaultErrorHandler.class.getName()))
-					hints.reflection().registerType(TypeReference.of(c), memberCategories);
+					reflection.registerType(TypeReference.of(c), memberCategories);
 
 				for (String r : Set.of("*RouteNotFoundError_dev.html", "*RouteNotFoundError_prod.html"))
-					hints.resources().registerPattern(r);
+					resources.registerPattern(r);
 			}
 		};
 	}
