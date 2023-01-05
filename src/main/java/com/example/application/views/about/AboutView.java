@@ -10,10 +10,12 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.BeanValidationBinder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import jakarta.annotation.security.PermitAll;
 
 import java.util.List;
 
 @PageTitle("About")
+@PermitAll
 @Route(value = "about", layout = MainLayout.class)
 public class AboutView extends VerticalLayout {
 
