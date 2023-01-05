@@ -28,40 +28,31 @@ public class MainLayout extends AppLayout {
 	}
 
 	private void addHeaderContent() {
-		DrawerToggle toggle = new DrawerToggle();
+		var toggle = new DrawerToggle();
 		toggle.getElement().setAttribute("aria-label", "Menu toggle");
 
 		viewTitle = new H2();
 		viewTitle.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
-
 		addToNavbar(true, toggle, viewTitle);
 	}
 
 	private void addDrawerContent() {
-		H1 appName = new H1("flow-native");
+		var appName = new H1("flow-native");
 		appName.addClassNames(LumoUtility.FontSize.LARGE, LumoUtility.Margin.NONE);
-		Header header = new Header(appName);
-
-		Scroller scroller = new Scroller(createNavigation());
-
+		var header = new Header(appName);
+		var scroller = new Scroller(createNavigation());
 		addToDrawer(header, scroller, createFooter());
 	}
 
 	private AppNav createNavigation() {
-		// AppNav is not yet an official component.
-		// For documentation, visit https://github.com/vaadin/vcf-nav#readme
-		AppNav nav = new AppNav();
-
+		var nav = new AppNav();
 		nav.addItem(new AppNavItem("Hello World", HelloWorldView.class, "la la-globe"));
 		nav.addItem(new AppNavItem("About", AboutView.class, "la la-file"));
-
 		return nav;
 	}
 
 	private Footer createFooter() {
-		Footer layout = new Footer();
-
-		return layout;
+		return new Footer();
 	}
 
 	@Override
@@ -71,7 +62,7 @@ public class MainLayout extends AppLayout {
 	}
 
 	private String getCurrentPageTitle() {
-		PageTitle title = getContent().getClass().getAnnotation(PageTitle.class);
+		var title = getContent().getClass().getAnnotation(PageTitle.class);
 		return title == null ? "" : title.value();
 	}
 

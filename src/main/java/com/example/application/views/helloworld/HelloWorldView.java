@@ -9,7 +9,9 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
+import jakarta.annotation.security.PermitAll;
 
+@PermitAll
 @PageTitle("Hello World")
 @Route(value = "hello", layout = MainLayout.class)
 @RouteAlias(value = "", layout = MainLayout.class)

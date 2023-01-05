@@ -1,6 +1,8 @@
 package com.example.application;
 
 import com.example.application.views.LoginView;
+import com.vaadin.flow.component.login.LoginI18n;
+import com.vaadin.flow.router.NotFoundException;
 import com.vaadin.flow.spring.security.VaadinWebSecurity;
 import org.apache.catalina.core.ApplicationContextFacade;
 import org.springframework.aot.hint.MemberCategory;
@@ -26,11 +28,10 @@ class SecurityConfiguration extends VaadinWebSecurity {
 
 		@Override
 		public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
-			for (var c : new String[] {
+			for (var c : new String[] { NotFoundException.class.getName(),
 					"org.springframework.security.web.csrf.CsrfTokenRequestAttributeHandler$SupplierCsrfToken",
-					ApplicationContextFacade.class.getName(), com.vaadin.flow.component.login.LoginI18n.class.getName(),
-					com.vaadin.flow.component.login.LoginI18n.Form.class.getName(),
-					com.vaadin.flow.component.login.LoginI18n.ErrorMessage.class.getName() }) {
+					ApplicationContextFacade.class.getName(), LoginI18n.class.getName(), LoginI18n.Form.class.getName(),
+					LoginI18n.ErrorMessage.class.getName() }) {
 				hints.reflection().registerType(TypeReference.of(c), MemberCategory.values());
 			}
 
@@ -49,7 +50,6 @@ class SecurityConfiguration extends VaadinWebSecurity {
 	UserDetailsManager userDetailsService() {
 		var josh = User.withUsername("josh").password("{noop}josh").roles("USER").build();
 		var marcus = User.withUsername("marcus").password("{noop}marcus").roles("USER").build();
-
 		return new InMemoryUserDetailsManager(josh, marcus);
 	}
 
