@@ -6,7 +6,7 @@ In this proof of concept, this is implemented as part of the application.
 
 ## Prerequisite
 
-You need GraalVM 22.3+. Get it from https://www.graalvm.org/downloads/ or use e.g. sdkman.
+You need GraalVM 22.3+. Get it [from the source (graalvm.org)](https://www.graalvm.org/downloads/) or use e.g. sdkman.
 Ensure it is set as the value to your `JAVA_HOME` environment variable. 
 
 ## Compiling the native app
