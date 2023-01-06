@@ -45,12 +45,12 @@ class ChatView extends VerticalLayout {
 
 	}
 
-
 	@Override
 	protected void onDetach(DetachEvent detachEvent) {
 		super.onDetach(detachEvent);
-		if(chatSubscription != null) {
+		if (chatSubscription != null) {
 			chatSubscription.dispose();
 		}
 	}
+
 }
