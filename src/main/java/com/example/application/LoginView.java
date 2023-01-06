@@ -8,9 +8,9 @@ import com.vaadin.flow.server.auth.AnonymousAllowed;
 
 @Route("login")
 @AnonymousAllowed
-public class LoginView extends VerticalLayout {
+class LoginView extends VerticalLayout {
 
-	public LoginView() {
+	LoginView() {
 		setSizeFull();
 
 		setJustifyContentMode(JustifyContentMode.CENTER);

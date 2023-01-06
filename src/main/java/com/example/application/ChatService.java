@@ -14,10 +14,7 @@ class ChatService {
 
 	private final Sinks.Many<Message> chatSink = Sinks.many().multicast().directBestEffort();
 
-	;
 	private final Flux<Message> chat = chatSink.asFlux().replay(10).autoConnect();
-
-	;
 
 	public Flux<Message> join() {
 		return chat;

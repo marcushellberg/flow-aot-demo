@@ -19,7 +19,7 @@ import java.util.ArrayList;
 @PermitAll
 class ChatView extends VerticalLayout {
 
-	public ChatView(ChatService service, AuthenticationContext authContext) {
+	ChatView(ChatService service, AuthenticationContext authContext) {
 
 		var logout = new Button("Log out", e -> authContext.logout());
 		var list = new MessageList();
