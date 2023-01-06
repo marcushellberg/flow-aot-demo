@@ -20,7 +20,7 @@ class ChatView extends VerticalLayout {
 
 	private final Disposable chatSubscription;
 
-	public ChatView(ChatService service, AuthenticationContext authContext) {
+	ChatView(ChatService service, AuthenticationContext authContext) {
 
 		var logout = new Button("Log out", e -> authContext.logout());
 		var list = new MessageList();
