@@ -20,9 +20,11 @@ drivers/
 error-screenshots/
 webpack.generated.js
 # stuff that seems to be regenerated on each build...
+dev-bundle/
 frontend/
 package-lock.json
 package.json
 tsconfig.json
 types.d.ts
 vite.config.ts
+
