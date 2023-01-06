@@ -205,6 +205,9 @@
                     <jvmArguments>-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=5328</jvmArguments>
                     <wait>500</wait>
                     <maxAttempts>240</maxAttempts>
+                    <jvmArguments>
+                        -agentlib:native-image-agent=config-output-dir=target/native-image
+                    </jvmArguments>
                 </configuration>
             </plugin>
 
