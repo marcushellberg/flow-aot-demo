@@ -31,26 +31,7 @@ import java.util.Set;
 @Push
 @SpringBootApplication
 @Theme(variant = Lumo.DARK)
-@ImportRuntimeHints(Application.Hints.class)
 public class Application implements AppShellConfigurator {
-
-	static class Hints implements RuntimeHintsRegistrar {
-
-		@Override
-		public void registerHints(RuntimeHints hints, ClassLoader classLoader) {
-			var mcs = MemberCategory.values();
-
-			for (var c : Set.of(AtmosphereHandlerService.class, AbstractBroadcasterProxy.class,
-					DefaultBroadcaster.class, AsyncSupportListener.class, AtmosphereFrameworkListener.class,
-					ExcludeSessionBroadcaster.class, SimpleBroadcaster.class, AtmosphereResourceEventListener.class,
-					AtmosphereInterceptor.class, BroadcastFilter.class, AtmosphereResource.class,
-					AtmosphereResourceImpl.class, AtmosphereResourceLifecycleInterceptor.class,
-					TrackMessageSizeInterceptor.class, SuspendTrackerInterceptor.class,
-					ManagedServiceInterceptor.class))
-				hints.reflection().registerType(c, mcs);
-		}
-
-	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
